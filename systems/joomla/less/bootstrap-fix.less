@@ -1,0 +1,205 @@
+// Copyright (C) YOOtheme GmbH, http://www.gnu.org/licenses/gpl.html GNU/GPL */
+
+/* ========================================================================
+   Name:            Bootstrap fix
+   Description:     Compatibility layer for Bootstrap
+ ========================================================================== */
+
+/* Fixes Bootstrap defacement caused by UIkit
+ ========================================================================== */
+
+body {
+    padding-left: 0;
+    padding-right: 0;
+    background-color: transparent;
+    font: inherit;
+    color: inherit;
+}
+
+ul.inline, ol.inline,
+ul.unstyled, ol.unstyled,
+.list-striped, .list-condensed,
+.nav:not(.nav-list),
+.pager, .pagination ul { padding-left: 0; }
+
+
+/* Fix text-rendering property in headings
+========================================================================== */
+h1, h2, h3, h4, h5, h6 { text-rendering: auto; }
+
+
+/* Fixes UIkit defacement caused by Bootstrap
+ ========================================================================== */
+
+/*
+ * Base
+ */
+
+li, dt, dd { line-height: @global-line-height; }
+
+pre {
+    border: 0;
+    border-radius: 0;
+}
+
+code {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: none;
+}
+
+q:before { content: open-quote; }
+q:after { content: close-quote; }
+
+blockquote p {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+blockquote small { line-height: inherit; }
+blockquote small:before { content: ''; }
+
+pre code {
+    border: 0;
+    background-color: inherit;
+    padding: 0;
+}
+
+iframe { max-width: none; }
+
+/*
+ * Form
+ */
+
+.uk-form { margin: 0; }
+
+.uk-form label {
+    display: inline-block;
+    margin: 0;
+    line-height: @global-line-height;
+    font-family: @base-body-font-family;
+    font-size: @global-font-size;
+    font-weight: normal;
+}
+
+.uk-form legend {
+    display: inline-block;
+    margin-bottom: 0;
+    color: inherit;
+}
+
+.uk-form input:not([class*='uk-form-width-']):not([class*='uk-width-']):not([type="radio"]):not([type="checkbox"]),
+.uk-form select:not([class*='uk-form-width-']):not([class*='uk-width-']),
+.uk-form textarea:not([class*='uk-form-width-']):not([class*='uk-width-']) { width: auto; }
+
+.uk-form select,
+.uk-form textarea,
+.uk-form input[type="text"],
+.uk-form input[type="password"],
+.uk-form input[type="datetime"],
+.uk-form input[type="datetime-local"],
+.uk-form input[type="date"],
+.uk-form input[type="month"],
+.uk-form input[type="time"],
+.uk-form input[type="week"],
+.uk-form input[type="number"],
+.uk-form input[type="email"],
+.uk-form input[type="url"],
+.uk-form input[type="search"],
+.uk-form input[type="tel"],
+.uk-form input[type="color"] {
+    height: auto;
+    margin: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+
+    /* Focus state */
+    &:focus { box-shadow: none; }
+
+}
+
+.uk-form input[type="file"] { height: auto; }
+
+.uk-form input[type="radio"],
+.uk-form input[type="checkbox"] { vertical-align: baseline; }
+
+/*
+ * Utility
+ */
+
+.uk-link-reset:focus,
+.uk-link-reset a:focus { text-decoration: none; }
+
+/*
+ * Search
+ * Define defaults because search is an addon and may not been loaded by the theme
+ */
+
+@search-width:                                  120px;
+@search-height:                                 30px;
+@search-padding:                                30px;
+@search-border:                                 rgba(0,0,0,0);
+@search-border-width:                           1px;
+@search-background:                             rgba(0,0,0,0);
+@search-color:                                  #444;
+@offcanvas-search-background:                   #1a1a1a;
+@offcanvas-search-border:                       rgba(0,0,0,0);
+@offcanvas-search-color:                        #ccc;
+.hook-search-field() {}
+.hook-search-field-focus() {}
+.hook-offcanvas-search-field() {}
+
+input.uk-search-field {
+    /* Reset */
+    -webkit-appearance: none;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: @global-font-size;
+    line-height: normal;
+    /* Override */
+    width: @search-width;
+    height: @search-height;
+    padding: 0 0 0 @search-padding;
+    border: @search-border-width solid @search-border;
+    background: @search-background;
+    color: @search-color;
+    -webkit-transition: all linear 0.2s;
+    transition: all linear 0.2s;
+    /* Override for themes */
+    .hook-search-field;
+}
+
+input.uk-search-field:focus {
+    /* Reset */
+    border: @search-border-width solid @search-border;
+    background: @search-background;
+    box-shadow: none;
+    /* Override */
+    outline: 0;
+    /* Override for themes */
+    .hook-search-field-focus;
+}
+
+.uk-offcanvas input.uk-search-field {
+    /* Override */
+    width: 100%;
+    border-color: @offcanvas-search-border;
+    background: @offcanvas-search-background;
+    color: @offcanvas-search-color;
+    /* Override for themes */
+    .hook-offcanvas-search-field;
+}
+
+/*
+ * Fixed off-canvas for Windows phones
+ */
+
+@-ms-viewport{
+    width: auto;
+}
